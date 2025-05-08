@@ -35,12 +35,15 @@ public class TestcontainersCloudFirstTest {
         try (PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres:14-alpine")
                 .withCopyToContainer(Transferable.of(initsql), "/docker-entrypoint-initdb.d/init.sql")) {
             postgreSQLContainer.start();
-            Connection connection = DriverManager.getConnection(postgreSQLContainer.getJdbcUrl(), postgreSQLContainer.getUsername(), postgreSQLContainer.getPassword());
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM guides");
-            preparedStatement.execute();
-            ResultSet resultSet = preparedStatement.getResultSet();
-            resultSet.next();
-            assertThat(resultSet.getInt(1)).isEqualTo(6);
+            
+            try (Connection connection = DriverManager.getConnection(postgreSQLContainer.getJdbcUrl(), 
+                    postgreSQLContainer.getUsername(), postgreSQLContainer.getPassword());
+                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(*) FROM guides");
+                 ResultSet resultSet = preparedStatement.executeQuery()) {
+                
+                resultSet.next();
+                assertThat(resultSet.getInt(1)).isEqualTo(6);
+            }
         }
     }
 
@@ -101,4 +104,3 @@ public class TestcontainersCloudFirstTest {
                     "       ('Getting started with Testcontainers for Go', 'https://testcontainers.com/guides/getting-started-with-testcontainers-for-go/'),\n" +
                     "       ('Testcontainers container lifecycle management using JUnit 5', 'https://testcontainers.com/guides/testcontainers-container-lifecycle/')\n" +
                     ";";
-}
