@@ -1,2 +1,4 @@
 PORT=3000
 CORS_ORIGINS=http://localhost:3001,https://votre-domaine.com
+REDIS_HOST=localhost
+REDIS_PORT=6379
