@@ -1,0 +1,4 @@
+.github/workflows/
+src/main/java/com/example/demo/
+src/test/java/com/example/demo/
+.mvn/wrapper/
