@@ -21,5 +21,7 @@ jobs:
         uses: atomicjar/testcontainers-cloud-setup-action@main
         with:
           token: ${{ secrets.TCC_SECRET_EXAMPLES }}
+          # Note: You must add this secret in your GitHub repository settings
+          # from your Testcontainers Cloud account
       - name: Run tests
         run: ./mvnw verify
