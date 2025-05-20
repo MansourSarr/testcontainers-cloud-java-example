@@ -1,0 +1,13 @@
+// src/hooks/useAfricaMode.js
+export const useAfricaMode = () => {
+  const [isLowPerf, setIsLowPerf] = useState(false);
+  
+  useEffect(() => {
+    const connection = navigator.connection;
+    if (connection) {
+      setIsLowPerf(connection.effectiveType === '2g');
+    }
+  }, []);
+
+  return { isLowPerf };
+};

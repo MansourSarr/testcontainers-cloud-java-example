@@ -1,0 +1,13 @@
+// components/chatbot/SecureChat.tsx
+import { useQuantumAuth } from '@afredeal/qkd-provider';
+
+export default function Chat() {
+  const { user, encryptMessage } = useQuantumAuth();
+  
+  const handleSend = async (message: string) => {
+    const encryptedMsg = await encryptMessage(message);
+    // API call with quantum-sealed payload
+  };
+  
+  return <ChatInterface onSend={handleSend} />;
+}

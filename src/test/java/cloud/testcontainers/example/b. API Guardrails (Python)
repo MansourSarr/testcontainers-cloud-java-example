@@ -1,0 +1,13 @@
+# guardrails/churn_detector.py
+from transformers import pipeline
+
+class BehavioralAnalytics:
+    def __init__(self):
+        self.sentiment = pipeline("text-classification", model="xlm-roberta-churn-specialized")
+        self.anomaly_detector = AnomalyDetectionModel.load_from_hub("afredeal/anomaly-v1")
+    
+    def analyze(self, text: str) -> dict:
+        return {
+            "sentiment": self.sentiment(text),
+            "risk_score": self.anomaly_detector.predict_proba([text])[0][1]
+        }

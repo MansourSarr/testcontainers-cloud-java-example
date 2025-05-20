@@ -1,0 +1,8 @@
+graph TD
+    A[Utilisateurs Sénégal] --> B[CDN Cloudflare Gratuit]
+    B --> C{Load Balancer AWS}
+    C --> D[Instance EC2 t3.micro - Frontend]
+    C --> E[Instance EC2 t3.small - Backend]
+    D --> F[(MongoDB Atlas)]
+    E --> G[(PostgreSQL - RDS Free Tier)]
+    E --> H[Stockage S3 - 5GB Gratuit]

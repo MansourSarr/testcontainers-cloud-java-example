@@ -1,0 +1,11 @@
+// src/services/sync.js
+export class AfricaSync {
+  async syncData(data) {
+    if (navigator.onLine) {
+      await API.cloudSync(data);
+    } else {
+      localStorage.setItem('pending', JSON.stringify(data));
+      this.queueUSSDUpdate(data); // Envoi via USSD
+    }
+  }
+}
